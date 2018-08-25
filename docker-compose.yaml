@@ -1,0 +1,25 @@
+version: '3'
+services:
+  nginx-a:
+    build: a 
+    ports:
+      - "7081:80"
+    networks:
+      - nginx
+  nginx-b:
+    build: b 
+    ports:
+      - "7082:80"
+    networks:
+      - nginx
+  router:
+    build: router 
+    ports:
+      - "7080:80"
+    depends_on:
+      - nginx-a
+      - nginx-b
+    networks:
+      - nginx
+networks:
+  nginx:
